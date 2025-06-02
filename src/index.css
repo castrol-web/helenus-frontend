@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@layer utilities {
+  .hero-custom-bg {
+    background-image: url('https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .header-custom-shadow {
+    clip-path:
+      "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+  }
+}
+
+/* React Select Tailwind-friendly styles with better contrast */
+.rs__control {
+  @apply bg-white border border-gray-400 rounded-md shadow-sm min-h-[44px] px-2 text-gray-900;
+}
+
+.rs__control--is-focused {
+  @apply border-blue-500 ring-1 ring-blue-300;
+}
+
+.rs__value-container {
+  @apply py-2 px-1;
+}
+
+.rs__input {
+  @apply text-sm text-gray-900;
+}
+
+.rs__single-value {
+  @apply text-sm text-gray-900;
+}
+
+.rs__placeholder {
+  @apply text-sm text-gray-600;
+}
+
+.rs__menu {
+  @apply bg-white border border-gray-300 shadow-md mt-1 rounded-md z-50;
+}
+
+.rs__option {
+  @apply px-3 py-2 text-sm text-gray-800 cursor-pointer hover:bg-gray-100;
+}
+
+.rs__option--is-focused {
+  @apply bg-blue-100 text-gray-900;
+}
+
+.rs__option--is-selected {
+  @apply bg-blue-500 text-white;
+}
+
+
+.radial-progress[data-value] {
+  --size: 5rem;
+  --thickness: 0.5rem;
+  width: var(--size);
+  height: var(--size);
+  border-width: var(--thickness);
+}
+.radial-progress[data-value="85"] {
+  --value: 85;
+}
+.radial-progress[data-value="95"] {
+  --value: 95;
+}
