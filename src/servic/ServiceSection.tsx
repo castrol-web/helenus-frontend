@@ -8,7 +8,7 @@ import ServiceCard from "./ServiceCard";
 
 const visas = [
     {
-        title: "Employment Visa",
+        title: "",
         description: "We have a tendency to believe the idea that smart looking of any website.",
         imageUrl: alaska,
         Icon: FaCamera ,
