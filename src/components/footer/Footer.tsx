@@ -26,8 +26,8 @@ function Footer() {
                 {/* Contact Info */}
                 <div>
                     <h2 className="text-lg font-bold text-white mb-3">Helenus Travel</h2>
-                    <p>0000 Juja, Nairobi, Kenya</p>
-                    <p className="mt-1">Phone: +254 658 649 538</p>
+                    <p><span className="pr-4">LOCATION:</span>Koinange street Kenya Complex House Building Office No T14</p>
+                    <p className="mt-1">Phone: +254113368527</p>
                     <p>
                         Email:{" "}
                         <a href="mailto:helenusagency@travel.com" className="text-blue-400 hover:underline">

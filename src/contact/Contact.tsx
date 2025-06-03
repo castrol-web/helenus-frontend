@@ -30,7 +30,7 @@ const Contact = () => {
                             {
                                 Icon: FaPhoneAlt,
                                 title: "Phone",
-                                detail: "+1 800-123-4567",
+                                detail: "+254113368527",
                             },
                             {
                                 Icon: FaEnvelope,
@@ -40,7 +40,7 @@ const Contact = () => {
                             {
                                 Icon: FaMapMarkerAlt,
                                 title: "Location",
-                                detail: "Nairobi, Kenya",
+                                detail: "Koinange street Kenya Complex House Building Office No T14",
                             },
                         ].map(({ Icon, title, detail}, index) => (
                             <motion.div
