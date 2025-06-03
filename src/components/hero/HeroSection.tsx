@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 import alaska from "../../assets/alaska.jpg"
 import palawan from "../../assets/palawan.jpg";
-import jane from "../../assets/jane.jpeg"
+import Alex from "../../assets/Alex.jpeg"
 
 
 
@@ -42,9 +42,9 @@ const HeroSection = () => {
                 </motion.h1>
 
                 <p className="text-gray-600 text-lg leading-relaxed">
-                    Helenus connects global talents and travelers with real-world
-                    opportunities. Your dreams, our mission – from visas to job placements
-                    and guided travels.
+                    Helenus Agency is dedicated to facilitating visa processing,Job recruitment in Europe(Netherlands,Denmark) Gulf(Qatar,Dubai,Saudi Arabia) Africa(Mauritius) Asia(Malaysia),Tours and Travels and Flight Reservation.
+                    Our commitment is to ensure a smooth,efficient pathway for individuals seeking opportunities overseas.
+
                 </p>
 
                 {/* Stats */}
@@ -82,12 +82,12 @@ const HeroSection = () => {
                     <button type="button" className="btn btn-primary px-6">About Us</button>
                     <div className="flex items-center gap-2">
                         <img
-                            src={jane}
+                            src={Alex}
                             alt="Founder"
                             className="w-10 h-10 rounded-full border"
                         />
                         <div className="text-sm text-left">
-                            <p className="font-semibold">Jane Mwende</p>
+                            <p className="font-semibold">Alex</p>
                             <p className="text-xs text-gray-500">Founder & CEO</p>
                         </div>
                     </div>

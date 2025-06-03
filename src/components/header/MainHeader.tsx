@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import alaska from "../../assets/alaska.jpg";
+import logo from "../../assets/logo.jpeg";
 import thailand from "../../assets/thailand.jpg";
 import palawan from "../../assets/palawan.jpg";
 
-const images = [alaska, thailand, palawan,];
+const images = [logo, thailand, palawan,];
 
 const content = [
+
+
   {
-    heading: "REMARKABLE DESTINATIONS",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitati",
+    heading: "HELENUS AGENCY ",
+    text: "Your Trusted Partner in Overseas Job Placements & Visa Solutions",
   },
   {
-    heading: "BRILLIANT TRAVEL EXPRERIENCES",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullanulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    heading: "Job Placements Abroad ",
+    text: "Helenus specializes in connecting job seekers to credible opportunities across",
   },
   {
     heading: "PURPOSE TO TRY HELENUS",

@@ -16,7 +16,7 @@ function Navbar() {
                     className={({ isActive }) =>
                         `inline-block px-4 py-2 rounded-md transition font-medium 
                     ${isActive
-                            ? "text-white bg-[#EB5B00]"
+                            ? "text-white bg-[#948979]"
                             : "text-white/80 hover:text-white hover:bg-orange-500/20"}`
                     }
                 >
@@ -67,7 +67,7 @@ function Navbar() {
 
 
     return (
-        <div className="navbar shadow-sm px-4 py-2 fixed top-0 left-0 w-full z-50 bg-gray-800 text-white">
+        <div className="navbar shadow-sm px-4 py-2 fixed top-0 left-0 w-full z-50 bg-[#393E46] text-[#DFD0B8]">
             {/* Logo - Left */}
             <div className="flex-1">
                 <NavLink to="/">
