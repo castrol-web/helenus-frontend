@@ -26,7 +26,7 @@ function Footer() {
                 {/* Contact Info */}
                 <div>
                     <h2 className="text-lg font-bold text-white mb-3">Helenus Travel</h2>
-                    <p><span className="pr-4">LOCATION:</span>Koinange street Kenya Complex House Building Office No T14</p>
+                    <p><span className="pr-4">LOCATION:</span>Utalii street Kenya Complex House Building Office No T14 third floor</p>
                     <p className="mt-1">Phone: +254113368527</p>
                     <p>
                         Email:{" "}

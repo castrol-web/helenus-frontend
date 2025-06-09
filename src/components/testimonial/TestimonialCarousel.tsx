@@ -7,7 +7,6 @@ import woman from "../../assets/woman.jpg"
 
 
 type Testimonial = {
-    name: string;
     title: string;
     quote: string;
     image: string;
@@ -22,21 +21,18 @@ export const TestimonialCarousel = () => {
         // Replace this with your API call
         const data: Testimonial[] = [
             {
-                name: "Jane Doe",
                 title: "Construction Engineer",
                 quote: "This agency helped me secure a job abroad effortlessly. Highly recommended!",
                 image: engineer,
                 rating: 5,
             },
             {
-                name: "John Smith",
                 title: "Travel Client",
                 quote: "Helenus Travel arranged my visa and flights professionally. 10/10 service!",
                 image: smile,
                 rating: 4,
             },
             {
-                name: "Amina Yusuf",
                 title: "Student Visa Applicant",
                 quote: "They guided me through the student visa process step-by-step. So grateful!",
                 image: woman,
@@ -80,7 +76,7 @@ export const TestimonialCarousel = () => {
                         <div className="card bg-base-100 shadow-xl p-6 flex flex-col md:flex-row items-center gap-6">
                             <img
                                 src={testimonials[current].image}
-                                alt={testimonials[current].name}
+                                alt={testimonials[current].title}
                                 className="w-24 h-24 rounded-full object-cover ring-2 ring-blue-500"
                             />
                             <div>
@@ -91,7 +87,6 @@ export const TestimonialCarousel = () => {
                                         i < testimonials[current].rating ? <FaStar key={i} /> : <FaRegStar key={i} />
                                     )}
                                 </div>
-                                <h4 className="mt-4 font-bold text-blue-700">{testimonials[current].name}</h4>
                                 <p className="text-sm text-gray-500">{testimonials[current].title}</p>
                             </div>
                         </div>
@@ -115,24 +110,6 @@ export const TestimonialCarousel = () => {
                 >
                     <FaChevronRight />
                 </button>
-            </div>
-
-            {/* Pagination */}
-            <div className="flex flex-wrap justify-center gap-2 mt-6">
-                {testimonials.map((t, i) => (
-                    <button
-                        title={`${t.name}`}
-                        type='button'
-                        key={i}
-                        onClick={() => setCurrent(i)}
-                        className={`text-xs md:text-sm px-3 py-1 rounded-full border ${current === i
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "bg-gray-100 text-gray-600 border-gray-300"
-                            }`}
-                    >
-                        {i+1}
-                    </button>
-                ))}
             </div>
         </div>
     );

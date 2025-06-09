@@ -9,10 +9,10 @@ function TeamMembers() {
         <section className="text-center">
             <h2 className="text-3xl font-semibold mb-6">Meet Our Team</h2>
             <div className="flex flex-wrap justify-center gap-8">
-                <Member name={"Alex"} position={"CEO/founder"} url={Alex} />
-                <Member name={"Gipson"} position={""} url={Gipson} />
-                <Member name={"Muthoni"} position={"Designer"} url={muthoni} />
-                <Member name={"Sofi"} position={"Care giving"} url={sofi} />
+                <Member position={"Director"} url={Alex} />
+                <Member position={"consultants"} url={Gipson} />
+                <Member position={"Designer"} url={muthoni} />
+                <Member position={"Care giving"} url={sofi} />
             </div>
         </section>
     )

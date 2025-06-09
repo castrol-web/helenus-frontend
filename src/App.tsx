@@ -14,30 +14,37 @@ import JobApplication from "./components/applicatn/JobApplication";
 import VisaApplication from "./components/applicatn/VisaApplication";
 import AddJob from "./Admin/form/AddJob";
 import AddVisa from "./Admin/form/AddVisa";
+import Dashboard from "./Admin/Dashboard/Dashboard";
+import AdminLayout from "./Admin/Dashboard/AdminLayout";
+import ServiceDetail from "./servic/ServiceDetail";
 
 
 function App() {
   return (
     <div className="min-h-screen bg-white text-black">
       <Router>
-        <Navbar />
         <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/blogs" element={<BlogPage />} />
-          <Route path="/application/job" element={<JobApplication />} />
-          <Route path="/application/visa" element={<VisaApplication />} />
-          <Route path="/admin/add/job" element={<AddJob />} />
-          <Route path="/admin/add/visa" element={<AddVisa />} />
-          <Route path="/blogs/:id" element={<BlogPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/admin/create/blog" element={<CreateBlog />} />
+          {/* Public Routes */}
+          <Route path="/" element={<><Navbar /><Home /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
+          <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
+          <Route path="/signup" element={<><Navbar /><Signup /><Footer /></>} />
+          <Route path="/login" element={<><Navbar /><Login /><Footer /></>} />
+          <Route path="/blogs" element={<><Navbar /><BlogPage /><Footer /></>} />
+          <Route path="/blogs/:id" element={<><Navbar /><BlogPage /><Footer /></>} />
+          <Route path="/services/:slug" element={<><Navbar /><ServiceDetail /><Footer /></>} />
+          <Route path="/application/job" element={<><Navbar /><JobApplication /><Footer /></>} />
+          <Route path="/application/visa" element={<><Navbar /><VisaApplication /><Footer /></>} />
+
+          {/* Admin Routes (with shared layout) */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="create/blog" element={<CreateBlog />} />
+            <Route path="add/job" element={<AddJob />} />
+            <Route path="add/visa" element={<AddVisa />} />
+            {/* add more routes here as needed */}
+          </Route>
         </Routes>
-        <Footer />
-        <ScrollButton />
-        <ChatWidget />
       </Router>
     </div>
   )

@@ -5,14 +5,15 @@ import Hero from "../components/hero/Hero"
 import HeroSection from "../components/hero/HeroSection"
 import StatsView from "../components/stats/StatsView"
 import { TestimonialCarousel } from "../components/testimonial/TestimonialCarousel"
-import ServicesSection from "../servic/ServiceSection"
+import ServiceSection from "../servic/ServiceSection"
+
 
 function Home() {
     return (
         <div className="mx-auto items-center justify-center mb-1">
             <MainHeader />
             <HeroSection />
-            <ServicesSection />
+            <ServiceSection />
             <BlogContainer />
             <FAQs />
             <StatsView />
