@@ -106,8 +106,8 @@ function Navbar() {
                     className="mt-3 z-[1] card card-compact dropdown-content w-60 bg-base-100 shadow"
                 >
                     <div className="card-body">
-                        <span className="font-bold text-lg">8 Items</span>
-                        <span className="text-info">Subtotal: $999</span>
+                        <span className="font-bold text-lg">0 Application</span>
+                        <p className="text-info">Status:<span className="text-gray-700">Unknown</span></p>
                         <div className="card-actions">
                             <button type="button" className="btn btn-primary btn-block">View Cart</button>
                         </div>
