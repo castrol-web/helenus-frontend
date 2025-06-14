@@ -65,7 +65,7 @@ const ServiceSection = () => {
         </div>
         <div className="bg-blue-600 text-white rounded-xl p-6 w-full lg:w-1/3 text-center shadow-md">
           <h3 className="text-xl font-semibold mb-2">Get your visa with a 100% success mindset</h3>
-          <button type="button" className="btn btn-warning text-white font-bold">Apply Now</button>
+          <Link type="button" to="/application/visa" className="btn btn-warning text-white font-bold">Apply Now</Link>
         </div>
       </div>
 

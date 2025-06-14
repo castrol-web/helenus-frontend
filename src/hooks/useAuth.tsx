@@ -11,7 +11,7 @@ export const useAuth = () => {
     if (token) {
       // Optionally decode or fetch user details
       setIsAuthenticated(true);
-      setUser({ token }); // Replace with real user data if available
+      setUser({ token }); 
     } else {
       setIsAuthenticated(false);
       setUser(null);

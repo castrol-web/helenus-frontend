@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { motion } from 'framer-motion';
 import { MdOutlineWorkOutline } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -217,6 +218,7 @@ const AddVisa = () => {
                     {Loading ? "Submitting..." : "Submit Visa"}
                 </button>
             </div>
+            <ToastContainer />
         </motion.form>
     );
 };

@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { countryList } from '../../utils/countries';
-
 const url = import.meta.env.VITE_SERVER_URL;
 
 const initialState = {

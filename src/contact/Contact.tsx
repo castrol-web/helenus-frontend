@@ -1,8 +1,45 @@
 import { motion } from "framer-motion";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "../components/header/Header";
+import { useState } from "react";
+import axios from "axios";
+const url = import.meta.env.VITE_SERVER_URL;
 
 const Contact = () => {
+    const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const response = await axios.post(`${url}/api/user/contact`, form);
+            if (response.status === 201) {
+                toast.success("Message sent successfully!")
+                setForm({ name: "", email: "", subject: "", message: "" })
+            }
+
+        } catch (error: any) {
+            const msg = error?.response?.data?.message;
+            if (error.response?.status === 400 && msg) {
+                toast.error(msg);
+            } if (error.response?.status === 404 && msg) {
+                toast.error(msg);
+            } else if (error.response?.status === 500) {
+                toast.error("Server error. Please try again later.");
+            } else {
+                toast.error("Failed to send message.");
+            }
+        } finally {
+            setLoading(false)
+        }
+    };
     return (
         <>
             <Header pageName={"CONTACT"} />
@@ -23,7 +60,7 @@ const Contact = () => {
                     </svg>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto text-slate-50">
                     {/* Contact Info Cards */}
                     <div className="grid gap-8">
                         {[
@@ -42,7 +79,7 @@ const Contact = () => {
                                 title: "Location",
                                 detail: "Koinange street Kenya Complex House Building Office No T14",
                             },
-                        ].map(({ Icon, title, detail}, index) => (
+                        ].map(({ Icon, title, detail }, index) => (
                             <motion.div
                                 key={index}
                                 whileHover={{ scale: 1.05 }}
@@ -69,15 +106,15 @@ const Contact = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            alert("Message sent!");
-                        }}
+                        onSubmit={handleSubmit}
                         className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
                     >
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Name</label>
                             <input
+                                name="name"
+                                value={form.name}
+                                onChange={handleChange}
                                 type="text"
                                 required
                                 className="input input-bordered w-full mt-1"
@@ -87,6 +124,9 @@ const Contact = () => {
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Email</label>
                             <input
+                                name="email"
+                                value={form.email}
+                                onChange={handleChange}
                                 type="email"
                                 required
                                 className="input input-bordered w-full mt-1"
@@ -94,25 +134,42 @@ const Contact = () => {
                             />
                         </div>
                         <div>
+                            <label className="block text-sm font-medium text-gray-700">Subject</label>
+                            <input
+                                name="subject"
+                                value={form.subject}
+                                onChange={handleChange}
+                                type="text"
+                                required
+                                className="input input-bordered w-full mt-1"
+                                placeholder="Enter subject"
+                            />
+                        </div>
+                        <div>
                             <label className="block text-sm font-medium text-gray-700">Message</label>
                             <textarea
+                                name="message"
+                                value={form.message}
+                                onChange={handleChange}
                                 rows={4}
                                 required
                                 className="textarea textarea-bordered w-full mt-1"
                                 placeholder="Write your message here..."
                             />
                         </div>
+
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             type="submit"
                             className="btn btn-primary w-full"
                         >
-                            Send Message
+                            {!loading ? "Send Message" : "sending..."}
                         </motion.button>
                     </motion.form>
                 </div>
             </section>
+            <ToastContainer />
         </>
     );
 };

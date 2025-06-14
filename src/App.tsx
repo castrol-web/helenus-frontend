@@ -17,12 +17,14 @@ import AddVisa from "./Admin/form/AddVisa";
 import Dashboard from "./Admin/Dashboard/Dashboard";
 import AdminLayout from "./Admin/Dashboard/AdminLayout";
 import ServiceDetail from "./servic/ServiceDetail";
+import ScrollToTop from "./components/scroll/ScrollToTop";
 
 
 function App() {
   return (
     <div className="min-h-screen bg-white text-black">
       <Router>
+        <ScrollToTop />
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<><Navbar /><Home /><Footer /><ScrollButton /><ChatWidget /></>} />

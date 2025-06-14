@@ -3,6 +3,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import alaska from "../../assets/alaska.jpg"
 import palawan from "../../assets/palawan.jpg";
 import Alex from "../../assets/Alex.jpeg"
+import { Link } from "react-router-dom";
 
 
 
@@ -79,7 +80,7 @@ const HeroSection = () => {
 
                 {/* Call to Action */}
                 <div className="mt-8 flex items-center justify-center lg:justify-start gap-4">
-                    <button type="button" className="btn btn-primary px-6">About Us</button>
+                    <Link type="button" to="/about" className="btn btn-primary px-6">About Us</Link>
                     <div className="flex items-center gap-2">
                         <img
                             src={Alex}
@@ -88,7 +89,7 @@ const HeroSection = () => {
                         />
                         <div className="text-sm text-left">
                             <p className="font-semibold">Alex</p>
-                            <p className="text-xs text-gray-500">Founder & CEO</p>
+                            <p className="text-xs text-gray-500">Director</p>
                         </div>
                     </div>
                 </div>

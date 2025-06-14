@@ -1,40 +1,104 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { motion } from 'framer-motion';
 import { MdBusinessCenter } from 'react-icons/md';
-// import axios from 'axios';
+import axios from 'axios';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+const url = import.meta.env.VITE_SERVER_URL;
 
 const initialState = {
     applicant_name: '',
     email: '',
-    job_id: "",
-    cv_file_url: "",
-    passport_file_url: "",
+    job_id: '',
     phone: '',
     job_title: '',
     additional_info: '',
-}
+};
 
 const JobApplication = () => {
     const [form, setForm] = useState(initialState);
-    // const [cv, setCv] = useState<File | null>(null);
-    // const [passport, setPassport] = useState<File | null>(null);
+    const [cv, setCv] = useState<File | null>(null);
+    const [passport, setPassport] = useState<File | null>(null);
+    const { isAuthenticated, loading, user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loading && !isAuthenticated) {
+            navigate("/login", { state: { from: location } });
+        }
+    }, [isAuthenticated, loading, navigate, location]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    // const handleFileChange = (
-    //     e: React.ChangeEvent<HTMLInputElement>,
-    //     setFile: React.Dispatch<React.SetStateAction<File | null>>
-    // ) => {
-    //     if (e.target.files) setFile(e.target.files[0]);
-    // };
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'cv' | 'passport') => {
+        const file = e.target.files?.[0];
+        if (!file) return;
 
-    const handleSubmit = async(e: React.FormEvent) => {
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            toast.error('Only PDF or Word documents are allowed.');
+            return;
+        }
+
+        if (type === 'cv') setCv(file);
+        if (type === 'passport') setPassport(file);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // const response = await axios.post(``)
-        toast.success('Job application submitted!');
+
+        if (!cv || !passport) {
+            toast.error('Please upload both your CV and Passport.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('applicant_name', form.applicant_name);
+        formData.append('email', form.email);
+        formData.append('job_id', form.job_id);
+        formData.append('phone', form.phone);
+        formData.append('job_title', form.job_title);
+        formData.append('additional_info', form.additional_info);
+        formData.append('cv_file', cv);
+        formData.append('passport_file', passport);
+
+        try {
+            const response = await axios.post(`${url}/api/user/job/${form.job_id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'x-access-token': user?.token || '',
+                },
+            });
+            if (response.status === 201) {
+                toast.success('Job application submitted successfully!');
+                setForm(initialState)
+                setCv(null)
+                setPassport(null)
+            }
+
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                toast.error('Session expired. Please log in again.');
+                setTimeout(() => {
+                    navigate('/login');
+                }, 1500)
+            } else {
+                const msg = error?.response?.data?.message;
+                if (error.response?.status === 400 && msg) {
+                    toast.error(msg);
+                }if (error.response?.status === 404 && msg) {
+                    toast.error(msg);
+                } else if (error.response?.status === 500) {
+                    toast.error("Server error. Please try again later.");
+                } else {
+                    toast.error("Failed to submit Application.");
+                }
+            }
+        }
     };
 
     return (
@@ -49,12 +113,11 @@ const JobApplication = () => {
                 <MdBusinessCenter className="text-3xl text-accent" /> Job Application
             </h2>
 
-            {/* Personal Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className="label">Full Name</label>
                     <input
-                        title='your name'
+                        title='enter fullname'
                         name="applicant_name"
                         value={form.applicant_name}
                         onChange={handleChange}
@@ -65,7 +128,7 @@ const JobApplication = () => {
                 <div>
                     <label className="label">Email</label>
                     <input
-                        title='email address'
+                        title='enter email'
                         name="email"
                         type="email"
                         value={form.email}
@@ -77,7 +140,7 @@ const JobApplication = () => {
                 <div>
                     <label className="label">Phone</label>
                     <input
-                        title='phone number'
+                        title='enter phone number'
                         name="phone"
                         type="tel"
                         value={form.phone}
@@ -97,39 +160,48 @@ const JobApplication = () => {
                         required
                     />
                 </div>
+                <div className="md:col-span-2">
+                    <label className="label">Job ID</label>
+                    <input
+                        title='enter job choice'
+                        name="job_id"
+                        value={form.job_id}
+                        onChange={handleChange}
+                        className="input input-bordered w-full"
+                        required
+                    />
+                </div>
             </div>
 
-            {/* File Uploads */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="label">Upload CV (PDF or Image)</label>
+                    <label className="label">Upload CV</label>
                     <input
                         title='upload cv'
                         type="file"
-                        // onChange={(e) => handleFileChange(e, setCv)}
-                        accept="application/pdf,image/*"
+                        accept=".pdf,.doc,.docx"
+                        onChange={(e) => handleFileChange(e, 'cv')}
                         className="file-input file-input-bordered w-full"
                         required
                     />
                 </div>
                 <div>
-                    <label className="label">Upload Passport (PDF or Image)</label>
+                    <label className="label">Upload Passport</label>
                     <input
-                        title='upload passport'
+                        title='upload passport document'
                         type="file"
-                        // onChange={(e) => handleFileChange(e, setPassport)}
-                        accept="application/pdf,image/*"
+                        accept=".pdf,.doc,.docx"
+                        onChange={(e) => handleFileChange(e, 'passport')}
                         className="file-input file-input-bordered w-full"
                         required
                     />
                 </div>
             </div>
 
-            {/* Additional Info */}
             <div>
                 <label className="label">Additional Information</label>
                 <textarea
-                    title='additional information'
+                    title='enter additional info'
                     name="additional_info"
                     value={form.additional_info}
                     onChange={handleChange}
@@ -141,6 +213,7 @@ const JobApplication = () => {
             <button type="submit" className="btn btn-accent w-full">
                 Submit Application
             </button>
+            <ToastContainer />
         </motion.form>
     );
 };
