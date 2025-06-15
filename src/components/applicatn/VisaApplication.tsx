@@ -60,7 +60,7 @@ const VisaApplication = () => {
 
     const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     if (!allowedTypes.includes(file.type)) {
-      toast.error('Only PDF or Word documents are allowed.');
+      toast.error('Only PDF or Word documents are allowed here.');
       return;
     }
 
