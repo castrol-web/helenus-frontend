@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { MdBusinessCenter } from 'react-icons/md';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 const url = import.meta.env.VITE_SERVER_URL;
 
 const initialState = {
@@ -29,6 +29,7 @@ const VisaApplication = () => {
   const [cv, setCv] = useState<File | null>(null);
   const [passport, setPassport] = useState<File | null>(null);
   const { isAuthenticated, loading, user } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
   const [visa, setVisa] = useState<Visa[]>([]);
   const [loadig, setLoading] = useState(false);
