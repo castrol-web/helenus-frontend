@@ -18,6 +18,8 @@ import Dashboard from "./Admin/Dashboard/Dashboard";
 import AdminLayout from "./Admin/Dashboard/AdminLayout";
 import ServiceDetail from "./servic/ServiceDetail";
 import ScrollToTop from "./components/scroll/ScrollToTop";
+import ApplicationViewer from "./components/applicatn/ApplicationViewer";
+import AdminApplicationManager from "./Admin/Dashboard/AdminApplicationManager";
 
 
 function App() {
@@ -28,15 +30,16 @@ function App() {
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<><Navbar /><Home /><Footer /><ScrollButton /><ChatWidget /></>} />
-          <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-          <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-          <Route path="/signup" element={<><Navbar /><Signup /><Footer /></>} />
-          <Route path="/login" element={<><Navbar /><Login /><Footer /></>} />
-          <Route path="/blogs" element={<><Navbar /><BlogPage /><Footer /></>} />
-          <Route path="/blogs/:id" element={<><Navbar /><BlogPage /><Footer /></>} />
-          <Route path="/services/:slug" element={<><Navbar /><ServiceDetail /><Footer /></>} />
-          <Route path="/application/job" element={<><Navbar /><JobApplication /><Footer /></>} />
-          <Route path="/application/visa" element={<><Navbar /><VisaApplication /><Footer /></>} />
+          <Route path="/about" element={<><Navbar /><About /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/contact" element={<><Navbar /><Contact /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/signup" element={<><Navbar /><Signup /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/login" element={<><Navbar /><Login /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/blogs" element={<><Navbar /><BlogPage /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/blogs/:id" element={<><Navbar /><BlogPage /><Footer /><ScrollButton /><ChatWidget /></>} />
+          <Route path="/services/:slug" element={<><Navbar /><ServiceDetail /><ScrollButton /><ChatWidget /><Footer /></>} />
+          <Route path="/application/job" element={<><Navbar /><JobApplication /><ScrollButton /><ChatWidget /><Footer /></>} />
+          <Route path="/application/visa" element={<><Navbar /><VisaApplication /><ScrollButton /><ChatWidget /><Footer /></>} />
+          <Route path="/myapplications" element={<><Navbar /><ApplicationViewer /><ScrollButton /><ChatWidget /><Footer /></>} />
 
           {/* Admin Routes (with shared layout) */}
           <Route path="/admin" element={<AdminLayout />}>
@@ -44,7 +47,7 @@ function App() {
             <Route path="create/blog" element={<CreateBlog />} />
             <Route path="add/job" element={<AddJob />} />
             <Route path="add/visa" element={<AddVisa />} />
-            {/* add more routes here as needed */}
+            <Route path="/admin/applications" element={<AdminApplicationManager />} />
           </Route>
         </Routes>
       </Router>

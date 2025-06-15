@@ -16,6 +16,7 @@
     "countries-list": "^3.1.1",
     "daisyui": "^5.0.35",
     "framer-motion": "^12.12.1",
+    "lucide-react": "^0.515.0",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",

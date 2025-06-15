@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from "../components/header/Header";
 import { useState } from "react";
 import axios from "axios";
+import GoogleMapEmbeded from "../home/GoogleMapEmbeded";
 const url = import.meta.env.VITE_SERVER_URL;
 
 const Contact = () => {
@@ -169,6 +170,7 @@ const Contact = () => {
                     </motion.form>
                 </div>
             </section>
+            <GoogleMapEmbeded />
             <ToastContainer />
         </>
     );
