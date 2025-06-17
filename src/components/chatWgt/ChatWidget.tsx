@@ -7,7 +7,7 @@ interface Message {
     text: string;
 }
 
-const WHATSAPP_NUMBER = "+1234567890"; 
+const WHATSAPP_NUMBER = "+1234567890";
 
 const fallbackResponses = [
     "Sorry, I don't understand.",
@@ -65,9 +65,10 @@ const ChatWidget = () => {
         <>
             {/* Floating Button */}
             <button
+                type="button"
                 title="Chat agent"
                 onClick={() => setOpen(!open)}
-                className="fixed bottom-6 left-6 btn btn-primary btn-circle z-50 shadow-lg"
+                className="fixed bottom-6 left-6 btn btn-primary btn-circle z-60 shadow-lg"
             >
                 <FaComments size={24} />
             </button>
@@ -80,12 +81,13 @@ const ChatWidget = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 50 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed bottom-20 left-6 w-80 bg-base-100 border border-gray-300 rounded-lg shadow-lg flex flex-col z-50"
+                        className="fixed bottom-20 left-6 w-80 bg-base-100 border border-gray-300 rounded-lg shadow-lg flex flex-col z-60"
                     >
                         {/* Header */}
                         <div className="flex justify-between items-center p-4 border-b border-gray-200">
                             <h4 className="font-bold text-primary">Chat with us</h4>
                             <button
+                                type="button"
                                 aria-label="Close chat"
                                 onClick={() => setOpen(false)}
                                 className="btn btn-ghost btn-sm"

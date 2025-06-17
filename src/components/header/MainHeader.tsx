@@ -7,28 +7,27 @@ import palawan from "../../assets/palawan.jpg";
 const images = [logo, thailand, palawan,];
 
 const content = [
-
-
   {
-    heading: "HELENUS AGENCY ",
-    text: "Your Trusted Partner in Overseas Job Placements & Visa Solutions",
+    heading: "Welcome to Helenus Agency",
+    text: "Empowering dreams through global job placements and expert visa assistance. Your journey begins here.",
   },
   {
-    heading: "Job Placements Abroad ",
-    text: "Helenus specializes in connecting job seekers to credible opportunities across",
+    heading: "Work Abroad with Confidence",
+    text: "We connect ambitious professionals with trusted employers in Africa, Asia, the Gulf, and Europe—legit, verified, and stress-free.",
   },
   {
-    heading: "PURPOSE TO TRY HELENUS",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitatifugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    heading: "Why Choose Helenus?",
+    text: "✓ Verified international job listings\n✓ End-to-end visa application support\n✓ Transparent process with zero hidden fees\n✓ Dedicated advisors for every applicant\n✓ 98% client satisfaction rate and growing!",
   },
 ];
+
 function MainHeader() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % images.length);
-    }, 10000);
+    }, 12000);
     return () => clearInterval(interval);
   }, []);
   return (

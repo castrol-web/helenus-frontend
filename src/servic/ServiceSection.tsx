@@ -1,22 +1,24 @@
 import { FaUserGraduate, FaBriefcase, FaUsers, FaGlobe, FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import alaska from "../assets/alaska.jpg";
-import thailand from "../assets/thailand.jpg";
-import palawan from "../assets/palawan.jpg";
+import student from "../assets/student.jpeg";
+import work from "../assets/work.jpg"
+import job from "../assets/job.jpg";
+import migration from "../assets/migration.jpg";
 import ServiceCard from "./ServiceCard";
 
 const visas = [
   {
     title: "Student Visa Assistance",
     description: "Comprehensive guidance for students applying to study abroad, including documentation, interviews, and embassy protocols.",
-    imageUrl: thailand,
+    imageUrl: student,
     Icon: FaUserGraduate,
     slug: "student-visa-assistance",
   },
   {
     title: "Work Visa Applications",
     description: "Secure legal authorization to work overseas with full application support tailored to your profession and target country.",
-    imageUrl: palawan,
+    imageUrl: work,
     Icon: FaBriefcase,
     slug: "work-visa-applications",
   },
@@ -30,14 +32,14 @@ const visas = [
   {
     title: "Job Placements Abroad",
     description: "Get matched with trusted international employers in Europe, Asia, Africa, and the Gulf. Includes interview prep and CV optimization.",
-    imageUrl: thailand,
+    imageUrl: job,
     Icon: FaGlobe,
     slug: "job-placements-abroad",
   },
   {
     title: "Migration & Visa Advisory",
     description: "Country-specific visa consultancy and advisory services for PR, citizenship, and migration planning.",
-    imageUrl: palawan,
+    imageUrl: migration,
     Icon: FaChalkboardTeacher,
     slug: "migration-visa-advisory",
   },
@@ -71,9 +73,7 @@ const ServiceSection = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {visas.map((visa) => (
-          <Link to={`/services/${visa.slug}`} key={visa.slug}>
-            <ServiceCard {...visa} />
-          </Link>
+          <ServiceCard {...visa} />
         ))}
       </div>
     </section>

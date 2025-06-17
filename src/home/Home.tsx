@@ -5,6 +5,7 @@ import Hero from "../components/hero/Hero"
 import HeroSection from "../components/hero/HeroSection"
 import StatsView from "../components/stats/StatsView"
 import { TestimonialCarousel } from "../components/testimonial/TestimonialCarousel"
+import AvailableBanner from "../servic/AvailableBunner"
 import ServiceSection from "../servic/ServiceSection"
 
 
@@ -14,6 +15,7 @@ function Home() {
             <MainHeader />
             <HeroSection />
             <ServiceSection />
+            <AvailableBanner />
             <BlogContainer />
             <FAQs />
             <StatsView />
