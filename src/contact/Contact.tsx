@@ -78,7 +78,7 @@ const Contact = () => {
                             {
                                 Icon: FaMapMarkerAlt,
                                 title: "Location",
-                                detail: "Koinange street Kenya Complex House Building Office No T14",
+                                detail: "Utalii street Kenya Complex House Building Office No T14 third floor",
                             },
                         ].map(({ Icon, title, detail }, index) => (
                             <motion.div

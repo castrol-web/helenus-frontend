@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+const url = import.meta.env.VITE_SERVER_URL;
 
 interface Message {
     sender: "user" | "bot";
@@ -38,7 +39,7 @@ const ChatWidget = () => {
         setInput("");
 
         try {
-            const res = await fetch("http://localhost:5000/chat", {
+            const res = await fetch(`${url}/api/user/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userInput }),
@@ -90,7 +91,7 @@ const ChatWidget = () => {
                                 type="button"
                                 aria-label="Close chat"
                                 onClick={() => setOpen(false)}
-                                className="btn btn-ghost btn-sm"
+                                className="btn btn-ghost btn-sm text-slate-50"
                             >
                                 ✕
                             </button>
@@ -136,7 +137,7 @@ const ChatWidget = () => {
                             <input
                                 type="text"
                                 placeholder="Type your message..."
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-slate-100"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
