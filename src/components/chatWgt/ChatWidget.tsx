@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+
 const url = import.meta.env.VITE_CHATBOT_URL;
 
 interface Message {
@@ -10,33 +11,31 @@ interface Message {
 
 const WHATSAPP_NUMBER = "+1234567890";
 
-const fallbackResponses = [
-    "Sorry, I don't understand.",
-    "Please ask something related to visas or job placement.",
-    "I'm here to help with visa and job-related questions!",
-];
-
 const ChatWidget = () => {
     const [open, setOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { sender: "bot", text: "Hello! How can we help you today?" },
     ]);
     const [input, setInput] = useState("");
+    const [lastIntent, setLastIntent] = useState<string | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
 
-    const isFallback = (text: string) =>
-        fallbackResponses.some((fallback) => text.toLowerCase().includes(fallback.toLowerCase()));
-
     const sendMessage = async () => {
         if (!input.trim()) return;
 
-        setMessages((msgs) => [...msgs, { sender: "user", text: input }]);
         const userInput = input;
         setInput("");
+
+        // Add user's message and temporary "thinking" message
+        setMessages((msgs) => [
+            ...msgs,
+            { sender: "user", text: userInput },
+            { sender: "bot", text: "Thinking..." }, // temporary placeholder
+        ]);
 
         try {
             const res = await fetch(`${url}/chat`, {
@@ -46,14 +45,22 @@ const ChatWidget = () => {
             });
             const data = await res.json();
 
-            setMessages((msgs) => [...msgs, { sender: "bot", text: data.response }]);
+            // Replace the last "Thinking..." message with actual response
+            setMessages((msgs) => [
+                ...msgs.slice(0, -1), // remove last message (Thinking...)
+                { sender: "bot", text: data.response },
+            ]);
+
+            setLastIntent(data.intent);
         } catch (err) {
             setMessages((msgs) => [
-                ...msgs,
+                ...msgs.slice(0, -1), // remove Thinking...
                 { sender: "bot", text: "Sorry, something went wrong. Please try again later." },
             ]);
+            setLastIntent(null);
         }
     };
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -74,7 +81,7 @@ const ChatWidget = () => {
                 <FaComments size={24} />
             </button>
 
-            {/* Chat Panel with animation */}
+            {/* Chat Panel */}
             <AnimatePresence>
                 {open && (
                     <motion.div
@@ -102,8 +109,7 @@ const ChatWidget = () => {
                             {messages.map((msg, i) => (
                                 <div
                                     key={i}
-                                    className={`chat ${msg.sender === "user" ? "chat-end" : "chat-start"
-                                        }`}
+                                    className={`chat ${msg.sender === "user" ? "chat-end" : "chat-start"}`}
                                 >
                                     <div
                                         className={`chat-bubble ${msg.sender === "user" ? "chat-bubble-primary" : "chat-bubble-info"
@@ -116,21 +122,20 @@ const ChatWidget = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* WhatsApp fallback button */}
-                        {messages.length > 0 &&
-                            isFallback(messages[messages.length - 1].text) && (
-                                <div className="p-4 border-t border-gray-200">
-                                    <a
-                                        href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="btn btn-success btn-block gap-2"
-                                    >
-                                        <FaWhatsapp size={20} />
-                                        Contact Agent on WhatsApp
-                                    </a>
-                                </div>
-                            )}
+                        {/* WhatsApp fallback button: show only when last intent is fallback */}
+                        {lastIntent === "fallback" && (
+                            <div className="p-4 border-t border-gray-200">
+                                <a
+                                    href={`https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g, "")}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-success btn-block gap-2"
+                                >
+                                    <FaWhatsapp size={20} />
+                                    Contact Agent on WhatsApp
+                                </a>
+                            </div>
+                        )}
 
                         {/* Input */}
                         <div className="p-4 border-t border-gray-200">
