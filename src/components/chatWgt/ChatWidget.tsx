@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-const url = import.meta.env.VITE_SERVER_URL;
+const url = import.meta.env.VITE_CHATBOT_URL;
 
 interface Message {
     sender: "user" | "bot";
@@ -39,7 +39,7 @@ const ChatWidget = () => {
         setInput("");
 
         try {
-            const res = await fetch(`${url}/api/user/chat`, {
+            const res = await fetch(`${url}/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userInput }),
