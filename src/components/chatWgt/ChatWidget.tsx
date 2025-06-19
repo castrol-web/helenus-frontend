@@ -149,7 +149,7 @@ const ChatWidget = () => {
                             <input
                                 type="text"
                                 placeholder="Type your message..."
-                                className="input input-bordered w-full"
+                                className="input input-bordered w-full text-slate-100"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 onKeyDown={handleKeyDown}
