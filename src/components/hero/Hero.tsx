@@ -6,10 +6,8 @@ function Hero() {
                 <div className="max-w-md">
                     <h1 className="mb-5 text-5xl font-bold">TRAVEL FAR ENOUGH WITH US</h1>
                     <p className="mb-5">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                        Your journey to global opportunities begins here. At Helenus, we open doors to life-changing travel, work, and visa solutions — guiding you every step of the way with trust, experience, and a passion for your success.
                     </p>
-                    <button type="button" className="btn btn-primary">Subscribe</button>
                 </div>
             </div>
         </div>

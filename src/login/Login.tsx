@@ -49,7 +49,7 @@ function Login() {
                 // Redirect logic here after login success
                 setTimeout(() => {
                     localStorage.setItem("token", response.data.token);
-                    navigate(from, { replace: true });// or the last visited route before auth
+                    navigate(from, { replace: true });
                 }, 1500);
             }
         } catch (error: any) {

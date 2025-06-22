@@ -5,9 +5,9 @@ type teamProps = {
 
 function Member({ position,url }: teamProps) {
     return (
-        <div className="w-64 text-center">
-            <img src={url} alt={url} className="rounded-full w-32 h-32 mx-auto mb-2" />
-            <p className="text-sm text-gray-600">{position}</p>
+        <div className="w-58 text-center mb-2">
+            <img src={url} alt={url} className="rounded-full w-30 h-30 mx-auto mb-2 hover:border" />
+            <p className="text-sm text-gray-400">{position}</p>
         </div>
     )
 }

@@ -21,6 +21,7 @@ import ScrollToTop from "./components/scroll/ScrollToTop";
 import ApplicationViewer from "./components/applicatn/ApplicationViewer";
 import AdminApplicationManager from "./Admin/Dashboard/AdminApplicationManager";
 import AvailableJobs from "./job/AvailableJobs";
+import Roadmap from "./components/roadmap/RoadMap";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/application/visa" element={<><Navbar /><VisaApplication /><ScrollButton /><ChatWidget /><Footer /></>} />
           <Route path="/myapplications" element={<><Navbar /><ApplicationViewer /><ScrollButton /><ChatWidget /><Footer /></>} />
           <Route path="/opportunities" element={<><Navbar /><AvailableJobs /><ScrollButton /><ChatWidget /><Footer /></>} />
+          <Route path="/application-roadmap" element={<><Navbar /><Roadmap /><ScrollButton /><ChatWidget /><Footer /></>} />
 
           {/* Admin Routes (with shared layout) */}
           <Route path="/admin" element={<AdminLayout />}>

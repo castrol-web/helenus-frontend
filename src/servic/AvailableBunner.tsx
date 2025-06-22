@@ -40,7 +40,7 @@ const AvailableBanner: React.FC = () => {
                         to="/opportunities"
                         className="btn btn-warning text-white font-bold px-6"
                     >
-                        View Openings
+                        View Available Jobs
                     </Link>
                     <Link
                         to="/application/visa"

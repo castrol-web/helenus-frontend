@@ -3,7 +3,7 @@ import { FaComments, FaWhatsapp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 const url = import.meta.env.VITE_CHATBOT_URL;
-const WHATSAPP_NUMBER = "+1234567890";
+const WHATSAPP_NUMBER = "+254113368527";
 
 interface Message {
     sender: "user" | "bot";
@@ -98,7 +98,7 @@ const ChatWidget = () => {
                                 type="button"
                                 aria-label="Close chat"
                                 onClick={() => setOpen(false)}
-                                className="btn btn-ghost btn-sm"
+                                className="btn btn-ghost btn-sm text-slate-100"
                             >
                                 ✕
                             </button>

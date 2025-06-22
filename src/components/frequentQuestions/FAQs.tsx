@@ -65,7 +65,7 @@ const FAQs = () => {
                     <FAQ key={id} question={question} answer={answer} />
                 ))}
             </div>
-            <div className='relative z-10 items-center justify-center mx-auto flex gap-7 mt-4'>
+            <div className='relative z-10 items-center justify-center mx-auto hidden gap-7 mt-4'>
                 <span className='text-slate-50'>still having another question?</span> <Link to="/questions" className='btn btn-primary'>ask a question</Link>
             </div>
         </section>
