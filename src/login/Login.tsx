@@ -116,9 +116,7 @@ function Login() {
 
                     <button
                         type="submit"
-                        className={`btn btn-primary w-full flex items-center justify-center gap-2 ${loading ? "btn-disabled" : ""
-                            }`}
-                        disabled={loading}
+                        className={`btn btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${loading ? "opacity-50 pointer-events-none" : ""}`}
                     >
                         {loading ? (
                             <>
@@ -130,6 +128,7 @@ function Login() {
                             </>
                         )}
                     </button>
+
                 </form>
 
                 <div className="text-center mt-6">

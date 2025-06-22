@@ -234,8 +234,7 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="btn btn-primary w-full flex items-center justify-center gap-2"
-            disabled={loading}
+            className={`btn btn-primary w-full flex items-center justify-center gap-2 transition-all duration-300 ${loading ? "opacity-50 pointer-events-none" : ""}`}
           >
             {loading ? (
               <>
@@ -247,6 +246,7 @@ const Signup = () => {
               </>
             )}
           </button>
+
         </form>
 
         <div className="text-center mt-6">
