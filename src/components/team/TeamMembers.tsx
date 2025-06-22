@@ -35,7 +35,7 @@ function TeamMembers() {
             <div className="py-12 lg:px-16 ">
                 <div>
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mx-auto text-center">
-                        <Member position="Manager" url={Alex} />
+                        <Member position="Director" url={Alex} />
                         <Member position="Creative Director" url={Gipson} />
                         <Member position="Market Consultant" url={muthoni} />
                         <Member position="Market Consultant" url={Clinton} />

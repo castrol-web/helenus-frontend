@@ -13,14 +13,20 @@ const initialState = {
     email: '',
     job_id: '',
     phone: '',
-    job_title: '',
     additional_info: '',
+};
+
+type Job = {
+    _id: string;
+    title: string;
 };
 
 const JobApplication = () => {
     const [form, setForm] = useState(initialState);
     const [cv, setCv] = useState<File | null>(null);
+     const [coverletter, setCoverLetter] = useState<File | null>(null);
     const [passport, setPassport] = useState<File | null>(null);
+    const [jobs, setJobs] = useState<Job[]>([]);
     const { isAuthenticated, loading, user } = useAuth();
     const navigate = useNavigate();
 
@@ -30,11 +36,25 @@ const JobApplication = () => {
         }
     }, [isAuthenticated, loading, navigate, location]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    useEffect(() => {
+        const getJob = async () => {
+            try {
+                const response = await axios.get(`${url}/api/user/jobs`);
+                if (response.status === 200) {
+                    setJobs(response.data)
+                }
+            } catch (error: any) {
+                console.error("failed to fetch jobs", error.response)
+            }
+        }
+        getJob();
+    }, [])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'cv' | 'passport') => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'cv' | 'passport' | "coverletter") => {
         const file = e.target.files?.[0];
         if (!file) return;
 
@@ -46,12 +66,13 @@ const JobApplication = () => {
 
         if (type === 'cv') setCv(file);
         if (type === 'passport') setPassport(file);
+        if (type === 'coverletter') setCoverLetter(file);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!cv || !passport) {
+        if (!cv || !passport || !coverletter) {
             toast.error('Please upload both your CV and Passport.');
             return;
         }
@@ -61,7 +82,7 @@ const JobApplication = () => {
         formData.append('email', form.email);
         formData.append('job_id', form.job_id);
         formData.append('phone', form.phone);
-        formData.append('job_title', form.job_title);
+        formData.append('coverletter',coverletter);
         formData.append('additional_info', form.additional_info);
         formData.append('cv_file', cv);
         formData.append('passport_file', passport);
@@ -73,6 +94,7 @@ const JobApplication = () => {
                     'x-access-token': user?.token || '',
                 },
             });
+            console.log(response.data)
             if (response.status === 201) {
                 toast.success('Job application submitted successfully!');
                 setForm(initialState)
@@ -90,7 +112,7 @@ const JobApplication = () => {
                 const msg = error?.response?.data?.message;
                 if (error.response?.status === 400 && msg) {
                     toast.error(msg);
-                }if (error.response?.status === 404 && msg) {
+                } if (error.response?.status === 404 && msg) {
                     toast.error(msg);
                 } else if (error.response?.status === 500) {
                     toast.error("Server error. Please try again later.");
@@ -149,27 +171,18 @@ const JobApplication = () => {
                         required
                     />
                 </div>
-                <div>
-                    <label className="label">Job Title</label>
-                    <input
-                        title='job title'
-                        name="job_title"
-                        value={form.job_title}
-                        onChange={handleChange}
-                        className="input input-bordered w-full"
-                        required
-                    />
-                </div>
                 <div className="md:col-span-2">
-                    <label className="label">Job ID</label>
-                    <input
-                        title='enter job choice'
-                        name="job_id"
-                        value={form.job_id}
+                    <label className="label">Choose Job</label>
+                    <select title='choose job type'
+                        className="select select-bordered w-full text-slate-50"
                         onChange={handleChange}
-                        className="input input-bordered w-full"
-                        required
-                    />
+                        name="job_id"
+                        required>
+                        <option value="">Choose visa type</option>
+                        {jobs.map((j, index) => (
+                            <option key={index + j.title} value={j._id}>{j.title}</option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
@@ -199,14 +212,14 @@ const JobApplication = () => {
             </div>
 
             <div>
-                <label className="label">Additional Information</label>
-                <textarea
-                    title='enter additional info'
-                    name="additional_info"
-                    value={form.additional_info}
-                    onChange={handleChange}
-                    rows={4}
-                    className="textarea textarea-bordered w-full"
+                <label className="label">Upload Cover Letter</label>
+                <input
+                    title='upload passport document'
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => handleFileChange(e, 'coverletter')}
+                    className="file-input file-input-bordered w-full"
+                    required
                 />
             </div>
 

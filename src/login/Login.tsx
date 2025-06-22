@@ -29,8 +29,15 @@ function Login() {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
         if (!loginData.email || !loginData.password) {
             toast.warning("All fields are required");
+            return;
+        }
+
+        if (!emailRegex.test(loginData.email)) {
+            toast.error("Please enter a valid email address");
             return;
         }
 
@@ -46,7 +53,6 @@ function Login() {
                 toast.success("Login successful");
                 setLoginData(initialData);
 
-                // Redirect logic here after login success
                 setTimeout(() => {
                     localStorage.setItem("token", response.data.token);
                     navigate(from, { replace: true });
@@ -139,7 +145,7 @@ function Login() {
                 </div>
             </motion.div>
 
-            <ToastContainer />
+            <ToastContainer position="top-center" theme="dark" />
         </div>
     );
 }

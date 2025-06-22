@@ -7,7 +7,7 @@ const navItems = [
     { label: "Dashboard", icon: <FaHome />, href: "/admin", end: true },
     { label: "Jobs", icon: <FaUserTie />, href: "/admin/add/job" },
     { label: "Visas", icon: <FaFileAlt />, href: "/admin/add/visa" },
-    { label: "Members", icon: <FaCog />, href: "/admin/Members" },
+    { label: "blogs", icon: <FaCog />, href: "/admin/create/blog" },
     { label: "Services", icon: <FaCog />, href: "/admin/Services" },
 ];
 

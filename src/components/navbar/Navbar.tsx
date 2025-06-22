@@ -10,7 +10,7 @@ function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [applicationCount, setApplicationCount] = useState(0);
     const [applicationStatus, setApplicationStatus] = useState("Unknown");
-    const { isAuthenticated, user } = useAuth();
+    const {user } = useAuth();
     const toggleMenu = () => setMenuOpen(!menuOpen);
 
     useEffect(() => {
@@ -108,7 +108,7 @@ function Navbar() {
             </div>
 
             {/* Cart Dropdown - Right */}
-            {isAuthenticated && <div className="dropdown dropdown-end mr-2">
+            <div className="dropdown dropdown-end mr-2">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
                     <div className="indicator">
                         <svg
@@ -146,7 +146,7 @@ function Navbar() {
                         </div>
                     </div>
                 </div>
-            </div>}
+            </div>
 
             {/* Mobile toggle */}
             <div className="lg:hidden">

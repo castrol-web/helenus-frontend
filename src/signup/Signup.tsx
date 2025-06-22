@@ -3,7 +3,7 @@ import axios from "axios";
 import { countries } from "countries-list";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
-import { FaUser, FaEnvelope, FaLock, FaPhone, FaGlobe, FaSpinner, FaArrowRight } from "react-icons/fa";
+import { FaUser, FaEnvelope, FaEye, FaEyeSlash, FaPhone, FaGlobe, FaSpinner, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,6 +23,8 @@ const initialDataSet = {
 const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [signupData, setSignupData] = useState(initialDataSet);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const countryOptions = Object.entries(countries).map(([code, c]) => ({
     value: c.name,
@@ -47,10 +49,36 @@ const Signup = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    const phoneRegex = /^\+?\d{7,15}$/;
+    const usernameRegex = /^[a-zA-Z0-9_]{3,}$/;
+
     if (!signupData.userName || !signupData.email || !signupData.password) {
       toast.warning("Please fill in all required fields.");
       return;
     }
+
+    if (!usernameRegex.test(signupData.userName)) {
+      toast.error("Username must be at least 3 characters and contain only letters, numbers, or underscores.");
+      return;
+    }
+
+    if (!emailRegex.test(signupData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!passwordRegex.test(signupData.password)) {
+      toast.error("Password must be at least 6 characters and include at least 1 letter and 1 number.");
+      return;
+    }
+
+    if (signupData.phone && !phoneRegex.test(signupData.phone)) {
+      toast.error("Phone number is invalid. Use international format e.g. +2547XXXXXXX.");
+      return;
+    }
+
 
     try {
       setLoading(true);
@@ -66,7 +94,7 @@ const Signup = () => {
       const msg = error?.response?.data?.message;
 
       if (error.response?.status === 400 && msg) {
-        toast.error(msg); // Specific message like "Username is already taken"
+        toast.error(msg);
       } else if (error.response?.status === 500) {
         toast.error("Server error. Please try again later.");
       } else {
@@ -184,20 +212,25 @@ const Signup = () => {
             />
           </div>
 
-          <div>
-            <label className="label text-sm font-semibold text-gray-700">
-              <FaLock className="inline mr-2" /> Password
-            </label>
+          <div className="relative">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={signupData.password}
               onChange={handleChange}
-              className="input input-bordered w-full text-slate-50"
+              className="input input-bordered w-full text-slate-50 pr-10"
               placeholder="Choose a secure password"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-3 text-gray-500 hover:text-blue-500 text-sm focus:outline-none"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
           </div>
+
 
           <button
             type="submit"
@@ -229,7 +262,7 @@ const Signup = () => {
         </div>
       </motion.div>
 
-      <ToastContainer />
+      <ToastContainer position="top-center" theme="dark" />
     </div>
   );
 };

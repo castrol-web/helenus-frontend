@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { motion } from "framer-motion";
 import { BadgeCheck, Clock, XCircle, FileText } from "lucide-react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaInbox } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
 const url = import.meta.env.VITE_SERVER_URL;
 import logo from "../../assets/logo.jpeg";
@@ -80,7 +81,35 @@ const ApplicationViewer: React.FC = () => {
             </div>
 
             {applications.length === 0 ? (
-                <p className="text-center text-gray-500">No applications found.</p>
+                <div className="flex flex-col items-center justify-center h-[70vh] px-4 text-center">
+                    {/* Icon + Message */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 max-w-sm w-full"
+                    >
+                        <FaInbox size={48} className="mx-auto mb-4 text-gray-500" />
+                        <h2 className="text-xl font-semibold text-white mb-2">No Applications Found</h2>
+                        <p className="text-gray-400">You haven’t started any visa or job applications yet.</p>
+                    </motion.div>
+
+                    {/* Call to Action Buttons */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="mt-6 flex flex-col sm:flex-row gap-4"
+                    >
+                        <Link to="/application/job" className="btn btn-primary px-6">
+                            Apply for Job
+                        </Link>
+                        <Link to="/application/visa" className="btn btn-warning px-6">
+                            Apply for Visa
+                        </Link>
+                    </motion.div>
+                </div>
+
             ) : (
                 applications.map((app) => {
                     const statusIcon = {

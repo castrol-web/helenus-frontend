@@ -46,7 +46,7 @@ function Footer() {
                             <FaTiktok className="text-2xl hover:text-slate-50" />
                         </a>
                         <div className="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] rounded-lg p-1">
-                            <a href="/instagram" aria-label="Instagram">
+                            <a href="https://www.instagram.com/helenus_firm?igsh=MXFqaHN4eHp1bnNjZg==" aria-label="Instagram">
                                 <FaInstagram className="text-xl text-white hover:text-slate-50" />
                             </a>
                         </div>

@@ -22,6 +22,7 @@ import ApplicationViewer from "./components/applicatn/ApplicationViewer";
 import AdminApplicationManager from "./Admin/Dashboard/AdminApplicationManager";
 import AvailableJobs from "./job/AvailableJobs";
 import Roadmap from "./components/roadmap/RoadMap";
+import VerifyEmail from "./verify/VerifyEmail";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/myapplications" element={<><Navbar /><ApplicationViewer /><ScrollButton /><ChatWidget /><Footer /></>} />
           <Route path="/opportunities" element={<><Navbar /><AvailableJobs /><ScrollButton /><ChatWidget /><Footer /></>} />
           <Route path="/application-roadmap" element={<><Navbar /><Roadmap /><ScrollButton /><ChatWidget /><Footer /></>} />
+          <Route path="/verify-email" element={<><Navbar /><VerifyEmail /><ScrollButton /><ChatWidget /><Footer /></>} />
 
           {/* Admin Routes (with shared layout) */}
           <Route path="/admin" element={<AdminLayout />}>
